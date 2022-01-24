@@ -12,7 +12,7 @@ import { roomActions } from '../store/room'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   
   // const [mount, setMount] = useState(false)
   //  useEffect(() => {
@@ -22,11 +22,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const dispatch = useDispatch()
 
   const keepLogin = async (email: string) => {
-    if (getLocalIdToken() && !!email) {
-      const { data } = await getUserInfo(email)
-      dispatch(userActions.setLoggedUser(data.data))
-    }
-    setIsLoading(true)
+    const { data } = await getUserInfo(email)
+    dispatch(userActions.setLoggedUser(data.data))
   }
 
   const getRoom = async (email: string) => {
@@ -36,12 +33,16 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   
   useEffect(() => {
     const email = getEmailFromJwt()
-    keepLogin(email)
-    getRoom(email)
+
+    if (getLocalIdToken() && !!email) {
+      keepLogin(email)
+      getRoom(email)
+    }
+    setIsLoading(false)
   }, [])
 
 
-  return isLoading && (
+  return !isLoading && (
     <>
       <GlobalStyle />
       <Header />
