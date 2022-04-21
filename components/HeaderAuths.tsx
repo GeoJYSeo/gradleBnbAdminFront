@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import useModal from "../hooks/useModal"
+import { deleteLocalIdToken, getLocalIdToken } from "../lib/utils";
 import { authActions } from "../store/auth";
 import AuthModal from "./auth/AuthModal";
 
@@ -26,6 +27,8 @@ const HeaderAuths: React.FC = () => {
           className="header-login-button"
           onClick={() => {
             dispatch(authActions.setAuthMode('signIn'))
+            deleteLocalIdToken()
+            getLocalIdToken()
             openModal()
           }}
         >

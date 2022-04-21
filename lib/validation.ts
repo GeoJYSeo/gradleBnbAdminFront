@@ -5,6 +5,8 @@ import { UserValidationType } from "../types/user";
 // 비밀번호 최소 자리수
 const PASSWORD_MIN_LENGTH = 4;
 
+export const isPresence = (value: string) => !!value
+
 // 비밀번호가 이름이나 이메일을 포함하는지
 export const isPasswordHasNameOrEmail = (password: string, email: string, lastname: string) =>
   !password || !lastname || password.includes(lastname) || password.includes(email.split('@')[0])

@@ -4,6 +4,7 @@ import { BedType } from "../types/room"
 
 // 초기상태
 const initialState: RegisterRoomState = {
+  id: null,
   // 건물 유형 큰 범주
   large_building_type: null,
   // 건물 유형
@@ -66,6 +67,7 @@ const registerRoom = createSlice({
   reducers: {
     setRegister(state, action: PayloadAction<RegisterRoomState>) {
       state = action.payload
+      return state
     },
     // 큰 건물 유형 변경하기
     setLargeBuildingType(state, action: PayloadAction<string>) {

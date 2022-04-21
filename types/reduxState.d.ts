@@ -27,6 +27,7 @@ export type SecondStepInfo = {
 
 // 숙소 등록하기
 export type RegisterRoomState = {
+  id: number | null
   large_building_type: string | null
   building_type: string | null
   room_type: string | null
@@ -71,6 +72,5 @@ export type SearchRoomState = {
 
 // 숙소 redux state
 export type RoomState = {
-  rooms: RoomType[]
-  detail: RoomType | null
+  roomList: allRoomType[] | null
 }

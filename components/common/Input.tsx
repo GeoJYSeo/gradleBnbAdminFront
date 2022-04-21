@@ -99,7 +99,6 @@ const Input: React.FC<IProps> = ({ icon, label, isValid=false, useValidation=tru
       {useValidation && validateMode && !isValid && errorMessage && (
         <p className='input-error-message'>{errorMessage}</p>
       )}
-
     </Container>
   )
 }

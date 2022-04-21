@@ -2,12 +2,11 @@
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RoomState } from "../types/reduxState";
-import { RoomType } from "../types/room";
+import { allRoomType } from "../types/room";
 
 // initial state
 const initialState: RoomState = {
-  rooms: [],
-  detail: null
+  roomList: []
 }
 
 const room = createSlice({
@@ -15,8 +14,8 @@ const room = createSlice({
   initialState,
   reducers: {
     // 상세 숙소 변경하기
-    setDetailRoom(state, action: PayloadAction<RoomType>) {
-      state.detail = action.payload
+    setRoomList(state, action: PayloadAction<allRoomType[]>) {
+      state.roomList = action.payload
     }
   }
 })

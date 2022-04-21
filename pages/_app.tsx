@@ -9,6 +9,7 @@ import { getUserInfo } from '../lib/api/user'
 import { useEffect, useState } from 'react'
 import { getRoomAPI } from '../lib/api/room'
 import { roomActions } from '../store/room'
+import { registerRoomActions } from '../store/registerRoom'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
 
@@ -28,7 +29,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
   const getRoom = async (email: string) => {
     const { data } = await getRoomAPI(email)
-    dispatch(roomActions.setDetailRoom(data.data[0]))
+    dispatch(registerRoomActions.setRegister(data.data[0]))
   }
   
   useEffect(() => {
@@ -40,7 +41,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     }
     setIsLoading(false)
   }, [])
-
 
   return !isLoading && (
     <>

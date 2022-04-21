@@ -5,20 +5,29 @@ import HamburgerIcon from '../public/static/svg/header/hamburger.svg'
 import Link from "next/link";
 import { userActions } from "../store/user";
 import { useSelector } from "../store";
+import { getRoomAPI } from "../lib/api/room";
+import { registerRoomActions } from "../store/registerRoom";
+import { RegisterRoomState } from "../types/reduxState";
+import { deleteLocalIdToken } from "../lib/utils";
 
 const HeaderUserProfile: React.FC = () => {
   const [isUsermenuOpened, setIsUsermenuOpened] = useState(false)
-  const room = useSelector((state) => state.room.detail)
-
+  const email = useSelector((state) => state.user.email)
+  const room = useSelector((state) => state.registerRoom)
+  
   const dispatch = useDispatch();
-
-  const setRoomInfo = () => {
-    console.log(111)
+  
+  const setRoomInfo = (roomInfo: RegisterRoomState) => {
+    dispatch(registerRoomActions.setRegister(roomInfo))
   }
+
+  useEffect(() => {
+    getRoomAPI(email).then(res => setRoomInfo(res.data.data[0]))
+  }, [])
 
   const logout = async () => {
     try {
-      localStorage.removeItem('IDToken')
+      deleteLocalIdToken()
       dispatch(userActions.initUser())
     } catch (e) {
       console.log(e)
@@ -42,13 +51,12 @@ const HeaderUserProfile: React.FC = () => {
       {isUsermenuOpened && (
         <ul className='header-usermenu'>
           <li>Management</li>
-          {!!room ?
+          {!!room.id ?
             <Link href='/room/register/building'>
               <a
                 role='presentation'
                 onClick={() => {
                   setIsUsermenuOpened(false)
-                  setRoomInfo()
                 }}
               >
                 <li>Modify</li>

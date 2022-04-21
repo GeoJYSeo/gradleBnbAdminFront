@@ -27,6 +27,12 @@ export const getLocalIdToken = () => {
   return idToken
 }
 
+// LocalStorage 삭제
+// delete LoaclStorage
+export const deleteLocalIdToken = () => {
+  window.localStorage.removeItem('IDToken')
+}
+
 // jwt 에서 email 추출
 // Extract the email from JWT
 export const getEmailFromJwt = () => {

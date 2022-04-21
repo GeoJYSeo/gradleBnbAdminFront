@@ -13,6 +13,7 @@ import { signinAPI } from "../../lib/api/auth";
 import useValidateMode from "../../hooks/useValidateMode";
 import { constant } from "../../lib/constant";
 import { userActions } from "../../store/user";
+import { isPresence } from "../../lib/validation";
 
 const Container = styled.form`
   width: 568px;
@@ -56,6 +57,8 @@ interface IProps {
 const SignInModal: React.FC<IProps> = ({ closeModal }) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [hasEmail, setHasEmail] = useState(false)
+  const [hasPassword, setHasPassword] = useState(false)
 
   const [isPasswordHided, setIsPasswordHided] = useState(true)
 
@@ -93,6 +96,9 @@ const SignInModal: React.FC<IProps> = ({ closeModal }) => {
     event.preventDefault()
 
     setValidateMode(true)
+
+    setHasEmail(!isPresence(email))
+    setHasPassword(!isPresence(password))
     
     if (validationSignInForm()) {
       const signinBody = {
@@ -128,7 +134,7 @@ const SignInModal: React.FC<IProps> = ({ closeModal }) => {
           icon={<MailIcon />}
           value={email}
           onChange={onChangeEmail}
-          isValid={email !== ""}
+          isValid={!hasEmail}
           errorMessage={constant.ERROR_MESSAGES.REQUIRED.EMAIL}
         />
       </div>
@@ -146,7 +152,7 @@ const SignInModal: React.FC<IProps> = ({ closeModal }) => {
           }
           value={password}
           onChange={onChangePassword}
-          isValid={password !== ""}
+          isValid={!hasPassword}
           errorMessage={constant.ERROR_MESSAGES.REQUIRED.PASSWORD}
         />
       </div>

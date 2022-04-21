@@ -7,10 +7,10 @@ import { makeQueryString } from '../../../lib/utils'
 const SearchRoomButton: React.FC = () => {
   const searchRoom = useSelector((state) => state.searchRoom)
 
-  const roomListHref = makeQueryString('/room', searchRoom)
+  // const roomListHref = makeQueryString('/room', searchRoom)
 
   return (
-    <Link href={roomListHref}>
+    <Link href='/room'>
       <a>
         <Button icon={<SearchIcon />} color='amaranth'>
           Search

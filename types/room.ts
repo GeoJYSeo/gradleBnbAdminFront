@@ -1,3 +1,6 @@
+import { type } from "os"
+import { UserType } from "./user"
+
 export type BedType =
   | 'Add a bed'
   | 'Sofa'
@@ -74,4 +77,44 @@ export type RoomType = {
   }[]
   created_at: string
   updated_at: string
+}
+
+export type allRoomType = {
+  id: number
+  large_building_type: string | null
+  building_type: string | null
+  room_type: string | null;
+  is_set_up_for_guest: boolean | null;
+  maximum_guest_count: number
+  amenities: string[]
+  bathroom_count: number
+  bathroom_type: 'private' | 'public'
+  bed_list: { id: number; type: BedType; count: number }[];
+  public_bed_list: { type: BedType; count: number }[];
+  latitude: number
+  longitude: number
+  country: string
+  state: string
+  city: string
+  street_address: string
+  detail_address: string
+  postcode: string
+  conveniences: string[]
+  photos: { id: number; url: string }[]
+  description: string
+  title: string
+  vacancy_list: {
+    price: string;
+    start_date: string;
+    end_date: string;
+  }[]
+  created_at: string
+  updated_at: string
+  user: UserType
+  pagination: {
+    total_pages: number
+    total_elements: number
+    current_page: number
+    current_elements: number
+  }
 }

@@ -45,6 +45,7 @@ const RegisterRoomTitle: React.FC = () => {
         <div className='register-room-title-wrapper'>
           <Input
             value={title}
+            isValid={true}
             label="Grab the guests' attention with a title that highlights the features and advantages of the accommodation."
             onChange={onChangeTitle}
           />

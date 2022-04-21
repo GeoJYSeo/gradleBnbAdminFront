@@ -1,34 +1,23 @@
 import { NextPage } from 'next'
-import RoomMain from '../../components/main/RoomMain'
-import { getRoomAPI } from '../../lib/api/room'
-import { roomActions } from '../../store/room'
+import RoomMain from '../../components/room/main/RoomMain'
+
 
 const index: NextPage = () => {
   return <RoomMain />
 }
 
-index.getInitialProps = async ({ query }) => {
-  console.log(query)
+// index.getInitialProps = async (ctx: any) => {
+//   try {
 
-  return {}
-}
-
-index.getInitialProps = async (ctx: any) => {
-  const { email } = ctx.query
-  const { store } = ctx
-  
-  console.log('-----------------------------------------')
-  console.log(email)
-  console.log('-----------------------------------------')
-  try {
-    if (email) {
-      // const { data } = await getRoomAPI(String(email))
-      // store.dispatch(roomActions.setDetailRoom(data))
-    }
-  } catch (e) {
-    console.log(e)
-  }
-  return {}
-}
+//       // store.dispatch(roomActions.setRoomList(data))
+//       // console.log('-----------------------------------------')
+//       // console.log(data)
+//       // console.log('-----------------------------------------')
+//       // return data.data[0]
+//       return "asdf"
+//   } catch (e) {
+//     console.log(e)
+//   }
+// }
 
 export default index
